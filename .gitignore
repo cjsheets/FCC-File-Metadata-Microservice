@@ -1,0 +1,34 @@
+#* -----------------------------------|
+#*| General nodeJS
+#*/
+
+build/Release
+jspm_packages
+logs
+node_modules
+public
+
+*.log
+npm-debug.log*
+*.pid
+*.pid.lock
+pids
+*.seed
+*.tgz
+.eslintcache
+.idea
+.node_repl_history
+.npm
+.sass-cache
+.tmp
+.vscode
+
+#* -----------------------------------|
+#*| Angular+Express Kickstart
+#*/
+
+.env
+/dist/*
+/server/config/local.env.js
+
+

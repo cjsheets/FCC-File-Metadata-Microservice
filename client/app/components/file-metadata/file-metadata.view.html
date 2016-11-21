@@ -24,11 +24,13 @@
     <h3>See It In Action</h3>
       <p>Enter a search term to see what the API returns.
       </p>
-      <form method="POST" enctype="multipart/form-data" action="/upload">
+      <form method="post" enctype="multipart/form-data" action="/upload/" name="theForm" id="file-upload">
         <div class="search-container form-group">
           <div class="label-floating is-empty">
             <div class="input-group">
-              <input type="text" class="form-control" readonly placeholder="Choose A File...">
+              <!--<input type="text" class="form-control" readonly placeholder="Choose A File...">-->
+              <input id="file" name="file" multiple="" type="file">
+              <input readonly="" class="form-control" placeholder="Choose A File..." type="text">
               <!--<input class="form-control" id="i5" type="text" [(ngModel)]="searchQuery"  (keyup.enter)="searchButtonClicked()">
               <span class="help-block">Perform a <code>Google Image Search</code>, preview JSON response below</span>-->
               <span class="input-group-btn">
@@ -40,15 +42,13 @@
                 Browse
                 <div class="ripple-container"></div></button>-->
             <label>
-              <span class="btn btn-raised btn-primary">
-                Browse&hellip; <input type="file" style="display: none;" name="upload" multiple>
+              <span class="btn btn-raised btn-primary" id="browse-file">
+                Browse&hellip; <!--<input type="file" style="display: none;" id="file" multiple>-->
               </span>
             </label>
           </div>
-          <div class="label-floating is-empty" style="width: 160px;">
-              <button class="btn btn-raised btn-primary" type="submit">
-                Upload
-              </button>
+          <div class="" style="width: 160px;">
+              <input class="btn btn-raised btn-primary" type="submit" value="Upload" id="sub-file-upload">
           </div>
         </div>
       </form>

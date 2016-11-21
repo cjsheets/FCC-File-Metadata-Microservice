@@ -5,11 +5,13 @@
 
 var express = require('express');
 var controller = require('./upload.controller');
-const debug = require('debug')('api:search');
+const debug = require('debug')('component:upload');
+var multer = require('multer');
+var upload = multer({ dest: 'upload/'});
 
 var router = express.Router();
 
-router.get('*', controller.index);
+router.post('*', upload.single('file'), controller.index);
 debug('Initialized /upload endpoint...');
 
 module.exports = router;

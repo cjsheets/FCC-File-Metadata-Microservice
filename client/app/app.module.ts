@@ -10,7 +10,6 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { FileMetadataService } from './components/file-metadata/file-metadata.service';
 import { FileMetadataComponent } from './components/file-metadata/file-metadata.component';
 @NgModule({
   imports: [
@@ -25,7 +24,6 @@ import { FileMetadataComponent } from './components/file-metadata/file-metadata.
     SidebarComponent,
     FileMetadataComponent
   ],
-  providers: [ FileMetadataService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

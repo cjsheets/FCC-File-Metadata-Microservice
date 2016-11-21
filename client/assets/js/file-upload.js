@@ -12,7 +12,7 @@ $(function() {
   $(document).ready( function() {
       $(':file').on('fileselect', function(event, numFiles, label) {
 
-          var input = $(this).parents('.form-group').find(':text'),
+          var input = $(this).parents('.search-container').find(':text'),
               log = numFiles > 1 ? numFiles + ' files selected' : label;
 
           if( input.length ) {
@@ -22,4 +22,13 @@ $(function() {
           }
       });
   });
+});
+
+$( document ).ready(function(){
+    $( "#sub-file-upload" ).click(function() {
+        $( "#file-upload" ).submit();
+    });
+    $( "#browse-file" ).click(function() {
+        $( "#file" ).click();
+    });
 });

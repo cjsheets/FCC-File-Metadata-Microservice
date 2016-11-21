@@ -4,6 +4,7 @@
  */
 
 import errors from './components/errors';
+import bodyParser from 'body-parser';
 import path from 'path';
 const debug = require('debug')('app:routes');
 
@@ -13,6 +14,7 @@ export default function(app) {
   // Predefined / API routes
   // app.use('/api/search/', require('./api/search'));
   // app.use('/api/latest/', require('./api/latest'));
+app.use(bodyParser.json());
 app.use('/upload', require('./components/upload'));
 
   // All undefined asset or api routes should return a 404

@@ -29,6 +29,7 @@
     "babel-loader": "^6.2.7",
     "babel-preset-es2015": "^6.18.0",
     "babel-register": "^6.18.0",
+    "body-parser": "^1.15.2",
     "bootstrap": ">=3.0",
     "bootstrap-material-design": "https://github.com/cjsheets/bootstrap-material-design/tarball/dist-cjs",
     "connect-mongo": "^1.3.2",

@@ -30,5 +30,5 @@ pids
 .env
 /dist/*
 /server/config/local.env.js
-
+upload
 

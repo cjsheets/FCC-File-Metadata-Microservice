@@ -1,8 +1,0 @@
-cmd - Identify system architecture	uname -p
-How can you determine if a cpu has hardware assisted virtualization	vmx (Intel) or svm (AMD) in /proc/cpuinfo
-What is the maximum RHEL RAM for a single system	3TB in 7.0, 6TB in 7.1
-What is the maximum boot HDD size without GPT/UEFI setup	2TB
-Describe paravirtualization vs full virtualization	full-virt allowes guests to run unmodified, para-virt requires drivers
-Describe hosted vs bare metal hypervisors	Hosted run on guest OS, bare metal (like ESXi/Xen) include a minimal VM OS
-What is RHEL default hypervisor, since when?	KVM since dropping Xen after RHEL5
-cmd - check the checksum of the downloaded RHEL iso	sha256sum rhel-*.iso

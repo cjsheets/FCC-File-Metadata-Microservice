@@ -29,6 +29,10 @@ export function index(req, res) {
               path: 'uploads/436ec561793aa4dc475a88e84776b1b9',
               size: 277056 }
 	 */
-	res.status(204).end();
+  var returnFile = req.file;
+  delete returnFile.destination;
+  delete returnFile.filename;
+  delete returnFile.path;
+	res.end(JSON.stringify(returnFile));
 
 }

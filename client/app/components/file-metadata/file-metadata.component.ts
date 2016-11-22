@@ -1,42 +1,84 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+//import { FileMetadataService } from './file-metadata.service';
+
+// https://github.com/wangzilong/angular2-multipartForm
+import { MultipartItem } from "../../plugins/multipart-upload/multipart-item";
+import { MultipartUploader } from "../../plugins/multipart-upload/multipart-uploader";
+
+const URL = '/upload';
 
 @Component({
   selector: 'app-file-metadata',
   templateUrl: './file-metadata.view.html',
-  styleUrls: ['./file-metadata.view.css']
+  styleUrls: ['./file-metadata.view.css'] //,
+//  providers: [ FileMetadataService ]
 })
+export class FileMetadataComponent {
+	private uploader:MultipartUploader = new MultipartUploader({url: URL});
 
-export class FileMetadataComponent implements OnInit {
+	multipartItem:MultipartItem = new MultipartItem(this.uploader);
 
-  private fileMetadataURL = 'api/search?t=';
-  private latestURL = 'api/latest';
-  searchQuery: string = '';
-  searchOffset: number;
-  queryString: string = '';
-  apiCallString: string = 'http://' + document.domain + '/' + this.fileMetadataURL;
-  responseJSON: [{}];
-  latestJSON: [{}];
-  responseLoading: boolean = false;
-  latestLoading: boolean = false;
+	filename:string;
+	file: File;
+	fileMetadataKeys: string[];
+	fileMetadata: {};
+	uploadMetadataKeys: string[];
+	uploadMetadata: {};
+                                                                                                               
+	upload : () => void;
+	uploadCallback : (data: any) => void;
 
-  searchButtonClicked(searchTerm: string): void {
-    this.responseLoading = true;
-  }
+	constructor(){
+		this.upload = () => {
+			console.debug("home.ts & upload() ==>");
+			// if (null == this.filename){
+      //   console.log(this.filename)
+			// 	console.error("home.ts & upload() form invalid.");
+			// 	return;
+			// }
+			if (this.multipartItem == null){
+				this.multipartItem = new MultipartItem(this.uploader);
+			}
+			if (this.multipartItem.formData == null)
+				this.multipartItem.formData = new FormData();
 
-  jsonToString(json: {}): string {
-    return JSON.stringify(json);
-  }
+			this.multipartItem.formData.append("filename",  this.filename);
+			this.multipartItem.formData.append("file",  this.file);
 
-  clearResponseJSON(): void {
-    this.responseJSON = [{}];
-  }
+			this.multipartItem.callback = this.uploadCallback;
+			this.multipartItem.upload();
+		}
 
-  ngOnInit(): void {
-    // this.getFileMetadataResults();
-  }
+		this.uploadCallback = (data) => {
+			console.debug("home.ts & uploadCallback() ==>");
+			this.file = null;
+			if (data){
+      this.uploadMetadata = JSON.parse(data);
+      this.uploadMetadataKeys = Object.keys(this.uploadMetadata);
+				console.debug("home.ts & uploadCallback() upload file success.");
+			}else{
+				console.error("home.ts & uploadCallback() upload file false.");
+			}
+		}
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred - file-search.component', error); // Needs to be improved
-    return Promise.reject(error.message || error);
-  }
- }
+
+	}
+
+	selectFile($event: any): void {
+		var inputValue = $event.target;
+		if( null == inputValue || null == inputValue.files[0]){
+			console.debug("Input file error.");
+			return;
+		}else {
+			this.file = inputValue.files[0];
+      this.fileMetadata = {
+        Name: this.file.name,
+        Size: String(this.file.size),
+        Date: String(this.file.lastModifiedDate),
+        Type: this.file.type
+      };
+      this.fileMetadataKeys = Object.keys(this.fileMetadata);
+      //console.log(this.fileMetadata);
+		}
+	}
+}

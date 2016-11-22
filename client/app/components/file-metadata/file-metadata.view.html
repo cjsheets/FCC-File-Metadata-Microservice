@@ -8,10 +8,9 @@
               <!-- Reset Indent -->
 
 <a name="top-anchor"></a>
-<section id="image-search">
+<section id="file-metadata">
   <h2>File Metadata Microservice</h2>
-  <p>This application abstracts a Google Custom Search Engine (CSE) into a simple
-    API for image searches. 
+  <p>This microservice displays file metadata at different stages of an upload.
   </p>
   <p>
     <a type="button" href="#more-info" class="btn btn-raised btn-secondary btn-sm pull-right">
@@ -22,7 +21,7 @@
   <hr>
   <section id="try-it">
     <h3>See It In Action</h3>
-      <p>Enter a search term to see what the API returns.
+      <p>Upload a file to test metadata inspection.
       </p>
       <form> <!--method="post" enctype="multipart/form-data" action="/upload/" name="theForm" id="file-upload"-->
         <div class="search-container form-group">
@@ -59,7 +58,7 @@
     </div>
     <br><br>
     <div class="panel panel-default">
-      <div class="panel-heading">Submission Inspection</div>
+      <div class="panel-heading">Server Inspection</div>
       <div class="panel-body">
         <p *ngFor="let key of uploadMetadataKeys">
         <span *ngIf="uploadMetadata[key]">
@@ -70,68 +69,38 @@
     </div>
     <br><br>
   </section><!--end of #tryit-->
-<br>
-<hr>
-  <section id="search-details">
-    <h3>Search API Details</h3>
-    <br>
-    <h5 style="text-align: center">GET /api/search?q=&lt;term&gt;[&o=&lt;number&gt;][&c=&lt;number&gt;]</h5>
-    <br><pre>
-
-      &#123;
-        "url": "https://site.org/path/to/image.jpg",
-        "thumbnail": "https://site.org/path/to/thumbnail.jpg",
-        "context": "https://site.org/path/to/original/page.html",
-        "snippet": "Context inforamtion about the image"
-      &#125;
-    </pre>
-  </section><!--end of #search-details-->  
 </section>
 <br>
 <hr>
 
 <section id="more-information"><a name="more-info"></a>
   <h2>Additional Information</h2>
-  <p>The API endpoints are accessable via GET request detailed above.
+  <p>
   </p>
   <p>The query string is mandatory, the offset and count are optional. The default
   count is 10 with an offset of 0.
   </p>
   <section id="limitations">
     <h3>Use Limitations</h3>
-    <p>This application makes use of free tiers of Heroku and Google CSE. Accordingly,
+    <p>This application makes use of Herokus free tier. Accordingly,
       the application is limited to:
     </p>
     <ul>
-      <li>100 searches / day</li>
       <li>18 hours / day of run time</li>
     </ul>
-    <p>After the search limit is reached the api will return an error message from Google.
+    <p>
     </p>
     <h3>Input Limitations</h3>
-    <p>Acceptable inputs to the API include:
+    <p>This service currently accepts only one file at a time.
     </p>
-    <ul>
-      <li>query: Any string of letters and numbers</li>
-      <li>offset: Any integer between 1-99</li>
-      <li>count: Any integer between 1-10</li>
-    </ul>
-    <p>The following API terms are also interchangable:
-    </p>
-    <ul>
-      <li>term || t || q =...</li>
-      <li>offset || o =...</li>
-      <li>count || c =...</li>
-    </ul>
   </section><!--end of #limitations-->
   <section id="user-story">
     <h3>User Story</h3>
     <p>The following user stories were the basis for this application:
     </p>
     <ol>
-      <li>I can get the image URLs, alt text and page urls for a set of images relating to a given search string.</li>
-      <li>I can paginate through the responses by adding a ?offset=2 parameter to the URL.</li>
-      <li>I can get a list of the most recently submitted search strings.</li> 
+      <li>I  can submit a FormData object that includes a file upload.</li>
+      <li>When I submit something, I will receive the file size in bytes within the JSON response</li>
     </ol>
   </section><!--end of #user-story-->
   <br>
@@ -139,9 +108,8 @@
   <section id="to-do">
     <h2>ToDo</h2>
   <ul>
-    <li>Add smooth scrolling</li>
-    <li>Fix Interface / Links</li>
-    <li>Add form validation</li>
+    <li>Add support for multiple files</li>
+    <li>Improve form validation</li>
     <li>Improve server side error message handling</li>
     <li>Add notifications to interface</li>
     <li>Rewrite footer</li>
@@ -159,16 +127,9 @@
     </div>
     <div class="col-md-3 scrollspy">
         <ul id="navspy" class="nav hidden-xs hidden-sm navspy" data-spy="affix">
-          <li><a href="#image-search">Search API</a>
+          <li><a href="#file-metadata">File Metadata</a>
             <ul class="nav navspy">
               <li><a href="#try-it">In Action</a></li>
-              <li><a href="#search-details">Details</a></li>
-            </ul>
-          </li>
-          <li><a href="#latest">Recent API</a>
-            <ul class="nav navspy">
-              <li><a href="#try-latest">In Action</a></li>
-              <li><a href="#latest-details">Details</a></li>
             </ul>
           </li>
           <li><a href="#more-information">Additional Info</a>

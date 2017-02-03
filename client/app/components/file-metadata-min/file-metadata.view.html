@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row scroll-container">
+    <div class="col-md-12">
+      <div class="container pages" id="content">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="well page active content" id="about">
+              <!-- Reset Indent -->
+
+<a name="top-anchor"></a>
+<section id="file-metadata">
+  
+  <section id="try-it">
+
+      <form> <!--method="post" enctype="multipart/form-data" action="/upload/" name="theForm" id="file-upload"-->
+        <div class="search-container form-group">
+          <div class="label-floating is-empty">
+            <div class="input-group">
+              <input id="file" name="file" multiple="" type="file" (change)="selectFile($event)">
+              <input readonly="" class="form-control" placeholder="Choose A File..." type="text" name="filename" [(ngModel)]="filename">
+              <span class="input-group-btn">
+              </span>
+            </div>
+          </div>
+          <div class="label-floating is-empty" style="width: 160px;">
+            <label>
+              <span class="btn btn-raised btn-primary" id="browse-file">
+                Browse&hellip;
+              </span>
+            </label>
+          </div>
+          <div class="" style="width: 160px;">
+            <input class="btn btn-raised btn-primary" type="submit" value="Upload" id="sub-file-upload" (click)="upload();">
+          </div>
+        </div>
+      </form>
+    <br><br>
+    <div class="panel panel-default">
+      <div class="panel-heading">Early Inspection</div>
+      <div class="panel-body">
+        <p *ngFor="let key of fileMetadataKeys">
+        <span *ngIf="fileMetadata[key]">
+          <b>{{key}}</b> - {{fileMetadata[key]}}
+        </span>
+        </p>
+      </div>
+    </div>
+    <br><br>
+    <div class="panel panel-default">
+      <div class="panel-heading">Server Inspection</div>
+      <div class="panel-body">
+        <p *ngFor="let key of uploadMetadataKeys">
+        <span *ngIf="uploadMetadata[key]">
+          <b>{{key}}</b> - {{uploadMetadata[key]}}
+        </span>
+        </p>
+      </div>
+    </div>
+    <br><br>
+  </section><!--end of #tryit-->
+</section>
+    
+              <!-- /Reset Indent -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

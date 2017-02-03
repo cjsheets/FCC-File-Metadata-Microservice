@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 //import { FileMetadataService } from './components/file-metadata/file-metadata.service';
-import { FileMetadataComponent } from './components/file-metadata/file-metadata.component';
+import { FileMetadataMinComponent } from './components/file-metadata-min/file-metadata.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -23,7 +23,7 @@ import { FileMetadataComponent } from './components/file-metadata/file-metadata.
     AppComponent,
     HeaderComponent,
     SidebarComponent,
-    FileMetadataComponent
+    FileMetadataMinComponent
   ],
 //  providers: [ FileMetadataService ],
   bootstrap: [ AppComponent ]

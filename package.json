@@ -57,7 +57,7 @@
     "serve-favicon": "^2.3.0",
     "strip-ansi": "^3.0.1",
     "style-loader": "^0.13.1",
-    "typescript": "^2.0.3",
+    "typescript": "2.0.10",
     "validator": "^6.1.0",
     "webpack": "^1.13.0",
     "webpack-merge": "^0.14.1",

@@ -5,7 +5,7 @@
 This app demonstrates the file metadata inspection capabilities of Node.js middleware. The client is built on Angular v2.x
 and Typescript, with a backend supported by Node + MongoDB and hosted on Heroku.
 
-A demo version of this app is deployed at: [https://angular-pinterest.firebaseapp.com](https://angular-pinterest.firebaseapp.com)
+A demo version of this app is deployed at: [https://m3ta.herokuapp.com/](https://m3ta.herokuapp.com/)
 
 ![](client/assets/img/app-screenshot.jpg?raw=true)
 

@@ -1,67 +1,74 @@
-/**
- * Express configuration
+/* -----------------------------------|
+ *|  Core Modules
  */
+var express         = require('express');
+var session         = require('express-session');
+var validator       = require('express-validator');
+var path            = require('path');
+var logger          = require('morgan');
+var cookieParser    = require('cookie-parser');
+var bodyParser      = require('body-parser');
+var morgan          = require('morgan');
+var flash           = require('connect-flash');
+var Raven           = require('raven');
+var debug           = require('debug')('express:main');
+var env             = require('./environment');
 
-'use strict';
+/* -----------------------------------|
+ *|  Configuration
+ */
+var app             = express();
+var port            = process.env.PORT || 5000;
+var http            = require('http').createServer(app);
+var io              = require('socket.io')(http);
 
-import config from './environment';
-import express from 'express';
-import favicon from 'serve-favicon';
-// import lusca from 'lusca';
-// import session from 'express-session';
-// import connectMongo from 'connect-mongo';
-import mongoose from 'mongoose';
-import path from 'path';
-const debug = require('debug')('config:express');
+// Setup logging and database middlewares
+let er = env.raven;
+Raven.config('https://' + er.key + ':' + er.secret + '@' + 
+  er.host + '/' + er.app_id).install();
 
-// const MongoStore = connectMongo(session);
+// require('./config/passport')(passport); // pass passport for configuration
 
-export default function(app) {
-  var env = app.get('env');
+debug('Setup express server, initialize middleware');
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser.json()); // get information from html forms
+app.use(validator());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(validator());
 
-  if(env === 'development' || env === 'test') {
-    app.use(express.static(config.root('.tmp')));
-    app.set('appPath', config.root('client'));
-  }
+app.set('views', path.join(__dirname, '../views'));
+app.set('view engine', 'ejs'); // set up ejs for templating
 
-  if(env === 'production') {
-    app.use(favicon(config.root('client/assets/favicon.ico')));
-    app.set('appPath', config.root('dist'));
-  }
-
-  app.use(express.static(app.get('appPath')));
-
-
-  app.set('views', config.root('/server/views'));
+app.use(express.static(path.join(__dirname, '../../dist')));
 
 
-  // // Persist sessions - Lusca depends on sessions
-  // app.use(session({
-  //   secret: config.secrets.session,
-  //   saveUninitialized: true,
-  //   resave: false,
-  //   store: new MongoStore({
-  //     mongooseConnection: mongoose.connection,
-  //     db: 'fcc_image-search-abstraction-layer'
-  //   })
-  // }));
+var initialStocks = {stocks: ['AMZN', 'GOOGL']};
+io.on('connection', (socket) =>{
+  io.emit('message', {
+    type:'new-message', initialStocks
+  });
+  console.log('user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+  socket.on('add-message', (message) => {
+    initialStocks = {stocks: message}
+    io.emit('message', {
+      type:'new-message', initialStocks
+    });
+  });
+});
 
-  // /**
-  //  * Lusca - express server security
-  //  * https://github.com/krakenjs/lusca
-  //  */
-  // if(env !== 'test' && !process.env.SAUCE_USERNAME) {
-  //   app.use(lusca({
-  //     csrf: {
-  //       angular: true
-  //     },
-  //     xframe: 'SAMEORIGIN',
-  //     hsts: {
-  //       maxAge: 31536000, //1 year, in seconds
-  //       includeSubDomains: true,
-  //       preload: true
-  //     },
-  //     xssProtection: true
-  //   }));
-  // }
-}
+/* -----------------------------------|
+ *|  Routes
+ */
+var routes          = require('../routes');
+app.use('/', routes);
+
+// launch ======================================================================
+http.listen(port); // listening with http instead of express
+debug(' 🌎  Express server listening on %d, in %s mode  🌎', port, process.env.NODE_ENV);
+
+
+module.exports = app;

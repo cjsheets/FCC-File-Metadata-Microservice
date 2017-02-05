@@ -1,34 +1,44 @@
-#* -----------------------------------|
-#*| General nodeJS
-#*/
+# compiled output
+/dist
+/tmp
 
-build/Release
-jspm_packages
-logs
-node_modules
-public
+# dependencies
+/node_modules
 
-*.log
-npm-debug.log*
-*.pid
-*.pid.lock
-pids
-*.seed
-*.tgz
-.eslintcache
-.idea
-.node_repl_history
-.npm
-.sass-cache
-.tmp
-.vscode
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
 
-#* -----------------------------------|
-#*| Angular+Express Kickstart
-#*/
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
-.env
-/dist/*
-/server/config/local.env.js
-upload
+# misc
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
 
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+#System Files
+.DS_Store
+Thumbs.db
+
+#Environment
+client/environments/environment.ts
+server/config/environment/development.env.js
+
+#Additional

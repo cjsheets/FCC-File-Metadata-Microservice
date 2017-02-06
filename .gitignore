@@ -43,3 +43,4 @@ server/config/environment/development.env.js
 
 #Additional
 proxy.conf.json
+/upload

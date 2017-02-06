@@ -16,7 +16,10 @@ Part of the [FreeCodeCamp](https://www.freecodecamp.com/cjsheets) curriculum bas
 
 ### Version 2.0
 
-This app is undergoing a major rewrite to simplify the codebase and remove dependencies.
+This app underwent a major rewrite to simplify the codebase, improve 
+readability and remove dependencies. 
+
+The next step is to develop tests for the file-metadata component and node server.
 
 The old version will remain available in the 1.0.0 branch.
 
@@ -54,7 +57,7 @@ webpacks dev server to the backend:
 }
 ```
 
-Start the backend with: `npm run express-dev`, followed by the development server in a seperate
+Start the backend with: `npm run express-dev`, followed by the development server in a separate
 terminal session: `npm run proxy`
 
 Navigate to `http://localhost:4200`
@@ -67,8 +70,8 @@ This package contains:
 | ------- | ------- |
 | Angular v2.x | Node.js |
 | Material | Express |
-| HTML5/CSS | Mongoose |
-| Webpack | Multer |
+| HTML5/CSS | Multer |
+| Webpack |  |
 
 | Both | 
 | ------- |

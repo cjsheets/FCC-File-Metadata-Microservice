@@ -38,7 +38,7 @@ testem.log
 Thumbs.db
 
 #Environment
-client/environments/environment.ts
+#client/environments/environment.ts
 server/config/environment/development.env.js
 
 #Additional

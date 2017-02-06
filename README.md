@@ -40,7 +40,7 @@ npm run express-prod
 
 Navigate to `http://localhost:3000`
 
-## Develop
+## Dev
 
 For client development, first create a `proxy.conf.json` to redirect client requests from
 webpacks dev server to the backend:

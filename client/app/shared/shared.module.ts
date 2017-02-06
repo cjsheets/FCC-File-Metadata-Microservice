@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler }  from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { Logger, ConsoleLogService } from './logger.service';
 import { RavenErrorHandler } from './sentry-io.service';
@@ -12,7 +13,8 @@ import { RavenErrorHandler } from './sentry-io.service';
   exports : [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   declarations: [
   ],

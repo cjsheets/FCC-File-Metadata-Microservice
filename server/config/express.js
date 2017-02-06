@@ -14,21 +14,19 @@ var Raven           = require('raven');
 var debug           = require('debug')('express:main');
 var env             = require('./environment');
 
+
 /* -----------------------------------|
  *|  Configuration
  */
 var app             = express();
-var port            = process.env.PORT || 5000;
-var http            = require('http').createServer(app);
-var io              = require('socket.io')(http);
+var port            = process.env.PORT || 3000;
 
-// Setup logging and database middlewares
+// Setup sentry.io logging
 let er = env.raven;
 Raven.config('https://' + er.key + ':' + er.secret + '@' + 
   er.host + '/' + er.app_id).install();
 
-// require('./config/passport')(passport); // pass passport for configuration
-
+// Core express setup
 debug('Setup express server, initialize middleware');
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
@@ -43,32 +41,14 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 app.use(express.static(path.join(__dirname, '../../dist')));
 
 
-var initialStocks = {stocks: ['AMZN', 'GOOGL']};
-io.on('connection', (socket) =>{
-  io.emit('message', {
-    type:'new-message', initialStocks
-  });
-  console.log('user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-  socket.on('add-message', (message) => {
-    initialStocks = {stocks: message}
-    io.emit('message', {
-      type:'new-message', initialStocks
-    });
-  });
-});
-
 /* -----------------------------------|
  *|  Routes
  */
 var routes          = require('../routes');
 app.use('/', routes);
 
-// launch ======================================================================
-http.listen(port); // listening with http instead of express
+// Launch the express server
+app.listen(port); // listening with http instead of express
 debug(' 🌎  Express server listening on %d, in %s mode  🌎', port, process.env.NODE_ENV);
-
 
 module.exports = app;

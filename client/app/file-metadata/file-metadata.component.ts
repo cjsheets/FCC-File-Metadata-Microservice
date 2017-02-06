@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
-//import { FileMetadataService } from './file-metadata.service';
 
-// https://github.com/wangzilong/angular2-multipartForm
 import { MultipartItem } from "../shared/plugin/multipart-item";
 import { MultipartUploader } from "../shared/plugin/multipart-uploader";
 
-const URL = '/upload';
+const URL = '/api/upload';
 
 @Component({
   selector: 'file-metadata',
   templateUrl: './file-metadata.view.html',
-  styleUrls: ['./file-metadata.view.css'] //,
-//  providers: [ FileMetadataService ]
+  styleUrls: ['./file-metadata.view.scss'] 
 })
 export class FileMetadataComponent {
 	private uploader:MultipartUploader = new MultipartUploader({url: URL});
@@ -31,11 +28,6 @@ export class FileMetadataComponent {
 	constructor(){
 		this.upload = () => {
 			console.debug("home.ts & upload() ==>");
-			// if (null == this.filename){
-      //   console.log(this.filename)
-			// 	console.error("home.ts & upload() form invalid.");
-			// 	return;
-			// }
 			if (this.multipartItem == null){
 				this.multipartItem = new MultipartItem(this.uploader);
 			}
@@ -78,7 +70,6 @@ export class FileMetadataComponent {
         Type: this.file.type
       };
       this.fileMetadataKeys = Object.keys(this.fileMetadata);
-      //console.log(this.fileMetadata);
 		}
 	}
 }

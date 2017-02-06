@@ -42,3 +42,4 @@ client/environments/environment.ts
 server/config/environment/development.env.js
 
 #Additional
+proxy.conf.json

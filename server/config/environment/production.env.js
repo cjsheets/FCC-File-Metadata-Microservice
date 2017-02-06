@@ -1,7 +1,7 @@
 /* -----------------------------------|
- *|  Environment variables for use 
- *|  during development. Not commited
- *|  to git repository
+ *|  Production Environment
+ *|    - from Node
+ *|    - from local env
  */
 
 module.exports = {
@@ -10,13 +10,10 @@ module.exports = {
     key     : process.env.RAVEN_KEY,
     secret  : process.env.RAVEN_SECRED,
     host    : 'sentry.io',
-    app_id  : '130915'
+    app_id  : '135795'
   },
   // Express.js Params
   express: {
-    session_secret    : process.env.EXPRESS_SESSION_SECRET,
-    // Anything not matching this pattern returns 404
-    valid_routes      : process.env.EXPRESS_VALID_ROUTES,
-    dev_routes        : false,  // Disable /dev routes
+    session_secret    : process.env.EXPRESS_SESSION_SECRET
   }
 };

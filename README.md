@@ -32,15 +32,32 @@ npm install
 
 ## Run
 
-For client development, use npm to launch the app:
+To run locally or deploy, first build the client with `ng build`, and start the backend:
 
 ```
-npm start
+npm run express-prod
 ```
 
 Navigate to `http://localhost:3000`
 
+## Develop
 
+For client development, first create a `proxy.conf.json` to redirect client requests from
+webpacks dev server to the backend:
+
+```
+{
+  "/api": {
+    "target": "http://localhost:3000",
+    "secure": false
+  }
+}
+```
+
+Start the backend with: `npm run express-dev`, followed by the development server in a seperate
+terminal session: `npm run proxy`
+
+Navigate to `http://localhost:4200`
 
 ## Technology Stack
 
@@ -56,6 +73,11 @@ This package contains:
 | Both | 
 | ------- |
 | Typescript |
+
+
+### Credit
+
+* MultipartItem/MultipartUploader: [wangzilong](https://github.com/wangzilong/angular2-multipartForm)
 
 
 ### License
